@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements
                 try {
                     URL githubUrl = new URL(searchQueryUrlString);
                     String githubSearchResults = NetworkUtils.getResponseFromHttpUrl(githubUrl);
-                    return githubSearchResults;()
+                    return githubSearchResults;
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
