@@ -222,7 +222,19 @@ public class TaskContentProvider extends ContentProvider {
     @Override
     public String getType(@NonNull Uri uri) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        int match = sUriMatcher.match(uri);
+
+        switch(match) {
+            case TASKS:
+                return "vnd.android.cursor.dir/" + TaskContract.AUTHORITY + "/" +
+                        TaskContract.PATH_TASKS;
+            case TASK_WITH_ID:
+                return "vnd.android.cursor.item/" + TaskContract.AUTHORITY + "/" +
+                        TaskContract.PATH_TASKS;
+            default:
+                throw new UnsupportedOperationException("Invalid uri: " + uri);
+        }
+
     }
 
 }
