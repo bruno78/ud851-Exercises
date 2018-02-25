@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import static android.provider.BaseColumns._ID;
 import static com.example.android.todolist.data.TaskContract.TaskEntry.TABLE_NAME;
 
 // Verify that TaskContentProvider extends from ContentProvider and implements required methods
@@ -136,6 +137,22 @@ public class TaskContentProvider extends ContentProvider {
                         null,
                         sortOrder);
                 break;
+            case TASK_WITH_ID:
+
+                // Getting the id from the URI
+                String id = uri.getPathSegments().get(1);
+
+                // Creating the Selection mark
+                String mSelection = "_id=?";
+                String[] mSelectionArgs = new String[]{id};
+
+                retCursor = db.query(TABLE_NAME,
+                        projection,
+                        mSelection,
+                        mSelectionArgs,
+                        null,
+                        null,
+                        sortOrder);
             default:
                 throw new UnsupportedOperationException("Unable to retrieve the tasks");
         }
